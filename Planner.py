@@ -4,7 +4,7 @@ import numpy as np
 import openpyxl
 import datetime
 import os
-import pickle
+#import pickle
 #from datetime import datetime
 from datetime import timedelta
 ## Required for writing to goolge sheet
@@ -381,37 +381,7 @@ def get_dates_resi(start_date, weekday1, weekday2, no_sessions):
         count+=1   
     return dates
 #######################################################
-################ Function to delete a row from google sheet #########
-def delet_row(spreadsheet_id, sheet_id, index):
-    SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-    credentials = None
 
-    creds = None
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'google1.json', SCOPES) # here enter the name of your downloaded JSON file
-            creds = flow.run_local_server(port=0)
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
-
-    service = build('sheets', 'v4', credentials=creds)
-    request_body={
-      "requests": [
-    {
-      "deleteDimension": {
-        "range": {
-          "sheetId": sheet_id,
-          "dimension": "ROWS",
-          "startIndex": index,
-          "endIndex": index+1 }       }     },
-      ], }
-    service.spreadsheets().batchUpdate(spreadsheetId=spreadsheet_id, body=request_body).execute()
 ################################################################################################
 
 ################# Function to delete the schedule #################
@@ -435,9 +405,9 @@ def deletion(spreadsheet_id,batch,location,module):
     row1 = number1.to_list()[0]+2
     data1 = df_Calendar[condition]
     print(row1,data1.shape)
-    delet_row(spreadsheet_id, 0, row-1)
-    for i in range(data1.shape[0]):
-        delet_row(spreadsheet_id, 433910658, row1-1)
+    #delet_row(spreadsheet_id, 0, row-1)
+    #for i in range(data1.shape[0]):
+        #delet_row(spreadsheet_id, 433910658, row1-1)
 
 ######################################################################
 ################# Function to delete online schedule ##############
