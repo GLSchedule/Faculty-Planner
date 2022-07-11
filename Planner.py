@@ -10,7 +10,7 @@ from datetime import timedelta
 ## Required for writing to goolge sheet
 
 
-data_file = ".\Faculty_Planner.xlsx"
+data_file = "Faculty_Planner.xlsx"
 data= openpyxl.load_workbook(data_file)
 
 #df = pd.read_excel(data_file,sheet_name = "Schedule")
